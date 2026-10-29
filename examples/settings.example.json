@@ -1,0 +1,20 @@
+{
+  "claude": {
+    "executablePath": "",
+    "model": "",
+    "effort": "medium",
+    "permissionMode": "acceptEdits",
+    "availableModels": ["", "sonnet", "opus"]
+  },
+  "wechat": {
+    "theme": "default",
+    "alias": "main",
+    "author": "",
+    "sshHost": "",
+    "sshUser": "",
+    "sshPort": 22,
+    "sshPrivateKeyPath": "",
+    "needOpenComment": 0,
+    "onlyFansCanComment": 0
+  }
+}

@@ -1,0 +1,1086 @@
+.paperdian-view {
+  height: 100%;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.paperdian-root {
+  --paperdian-accent: var(--interactive-accent);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 36px;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  color: var(--text-normal);
+  background: var(--background-primary);
+  font-family: var(--font-interface);
+}
+
+.paperdian-root *,
+.paperdian-root *::before,
+.paperdian-root *::after {
+  box-sizing: border-box;
+}
+
+.paperdian-root button {
+  box-shadow: none;
+}
+
+.paperdian-root button:focus-visible,
+.paperdian-root input:focus-visible,
+.paperdian-root select:focus-visible,
+.paperdian-root textarea:focus-visible,
+.paperdian-root summary:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 2px;
+}
+
+.paperdian-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  min-height: 46px;
+  gap: 12px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+}
+
+.paperdian-brand,
+.paperdian-tabs,
+.paperdian-tab,
+.paperdian-chat-header,
+.paperdian-history-header,
+.paperdian-composer-toolbar,
+.paperdian-composer-controls,
+.paperdian-note-chip,
+.paperdian-skill-button,
+.paperdian-skill-chip,
+.paperdian-tool summary,
+.paperdian-wechat-controls,
+.paperdian-toggle-label,
+.paperdian-publish-row {
+  display: flex;
+  align-items: center;
+}
+
+.paperdian-brand {
+  min-width: 0;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.paperdian-brand-icon {
+  display: inline-flex;
+  color: var(--paperdian-accent);
+}
+
+.paperdian-brand-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.paperdian-brand-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paperdian-tabs {
+  flex: 0 0 auto;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 7px;
+  background: var(--background-secondary);
+}
+
+button.paperdian-tab,
+button.paperdian-tab:hover,
+button.paperdian-tab:active,
+button.paperdian-tab:focus-visible {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 26px;
+  padding: 3px 8px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+button.paperdian-tab:hover,
+button.paperdian-tab:focus-visible,
+button.paperdian-tab.is-active {
+  color: var(--text-normal);
+}
+
+button.paperdian-tab.is-active {
+  background: var(--background-primary);
+}
+
+.paperdian-tab svg {
+  width: 13px;
+  height: 13px;
+}
+
+.paperdian-surface,
+.paperdian-claude-workspace,
+.paperdian-chat-panel,
+.paperdian-messages-wrapper {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.paperdian-surface {
+  display: flex;
+  overflow: hidden;
+}
+
+.paperdian-claude-workspace {
+  position: relative;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.paperdian-history-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 0;
+  width: 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  background: var(--background-secondary);
+}
+
+.paperdian-root.is-wide .paperdian-claude-workspace.is-history-open .paperdian-history-panel {
+  flex-basis: 220px;
+  width: 220px;
+  min-width: 180px;
+  border-left: 1px solid var(--background-modifier-border);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.paperdian-root.is-compact .paperdian-history-panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: 30;
+  flex: 0 0 auto;
+  width: min(84%, 300px);
+  min-width: 180px;
+  max-width: 300px;
+  transform: translateX(102%);
+  box-shadow: -12px 0 28px rgba(0, 0, 0, 0.18);
+  transition: transform 160ms ease, visibility 160ms;
+}
+
+.paperdian-root.is-compact .paperdian-claude-workspace.is-history-open .paperdian-history-panel {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.paperdian-history-header {
+  justify-content: space-between;
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 8px 10px 4px 12px;
+}
+
+.paperdian-history-title {
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.paperdian-history-close {
+  display: inline-flex !important;
+}
+
+.paperdian-history-search {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 6px;
+  margin: 4px 8px 8px;
+  padding: 5px 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-primary);
+  color: var(--text-muted);
+}
+
+.paperdian-history-search svg {
+  width: 13px;
+  height: 13px;
+}
+
+.paperdian-history-search input,
+.paperdian-history-search input:hover,
+.paperdian-history-search input:focus {
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-normal);
+  font: inherit;
+  font-size: 11px;
+  outline: 0;
+}
+
+.paperdian-history-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0 6px 10px;
+  overflow-y: auto;
+}
+
+.paperdian-history-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin-bottom: 2px;
+  border-radius: 6px;
+}
+
+.paperdian-history-item:hover,
+.paperdian-history-item.is-active {
+  background: var(--background-modifier-hover);
+}
+
+button.paperdian-history-main,
+button.paperdian-history-main:hover,
+button.paperdian-history-main:focus-visible,
+button.paperdian-history-main:active {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 7px 54px 7px 8px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-normal);
+  text-align: left;
+}
+
+.paperdian-history-name {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 550;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paperdian-history-meta {
+  margin-top: 2px;
+  color: var(--text-faint);
+  font-size: 9px;
+}
+
+.paperdian-history-actions {
+  position: absolute;
+  right: 4px;
+  display: flex;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.paperdian-history-item:hover .paperdian-history-actions,
+.paperdian-history-item:focus-within .paperdian-history-actions {
+  opacity: 1;
+}
+
+.paperdian-chat-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--background-primary);
+}
+
+.paperdian-chat-header {
+  flex: 0 0 auto;
+  gap: 8px;
+  min-height: 48px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.paperdian-chat-title-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.paperdian-chat-title {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paperdian-chat-subtitle {
+  overflow: hidden;
+  margin-top: 1px;
+  color: var(--text-faint);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+button.paperdian-icon-button,
+button.paperdian-icon-button:hover,
+button.paperdian-icon-button:focus-visible,
+button.paperdian-icon-button:active {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 26px;
+  width: 26px;
+  min-width: 26px;
+  height: 26px;
+  min-height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-muted);
+}
+
+button.paperdian-icon-button:hover,
+button.paperdian-icon-button:focus-visible {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+button.paperdian-icon-button:disabled {
+  background: transparent;
+  color: var(--text-faint);
+  cursor: default;
+}
+
+.paperdian-icon-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.paperdian-messages-wrapper {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.paperdian-messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 18px max(14px, calc((100% - 720px) / 2)) 14px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.paperdian-messages:focus {
+  outline: 0;
+}
+
+.paperdian-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 30px 16px 90px;
+  text-align: center;
+}
+
+.paperdian-welcome-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 12px;
+  color: var(--paperdian-accent);
+  background: var(--background-secondary);
+}
+
+.paperdian-welcome-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.paperdian-welcome-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  color: var(--text-normal);
+}
+
+.paperdian-welcome-copy {
+  max-width: 360px;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.paperdian-message {
+  width: 100%;
+  margin: 0 auto 18px;
+  color: var(--text-normal);
+}
+
+.paperdian-message.is-user {
+  width: fit-content;
+  max-width: 88%;
+  margin-right: 0;
+  padding: 8px 11px;
+  border-radius: 10px 10px 3px 10px;
+  background: var(--background-secondary);
+}
+
+.paperdian-message-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.paperdian-message.is-user .paperdian-message-header {
+  display: none;
+}
+
+.paperdian-message-state {
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.paperdian-message-state.is-error {
+  color: var(--text-error);
+}
+
+.paperdian-message-body {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.62;
+  white-space: pre-wrap;
+}
+
+.paperdian-message.is-assistant .paperdian-message-body {
+  white-space: normal;
+}
+
+.paperdian-message-body > :first-child {
+  margin-top: 0;
+}
+
+.paperdian-message-body > :last-child {
+  margin-bottom: 0;
+}
+
+.paperdian-message-body pre {
+  overflow-x: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 7px;
+  background: var(--background-secondary);
+}
+
+.paperdian-message-body code {
+  font-family: var(--font-monospace);
+  font-size: 0.9em;
+}
+
+.paperdian-message-body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.paperdian-thinking {
+  color: var(--text-muted);
+  font-style: italic;
+  animation: paperdian-pulse 1.4s ease-in-out infinite;
+}
+
+.paperdian-tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.paperdian-tool {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-secondary);
+  font-size: 10px;
+}
+
+.paperdian-tool summary {
+  gap: 6px;
+  min-height: 29px;
+  padding: 5px 8px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.paperdian-tool summary::-webkit-details-marker {
+  display: none;
+}
+
+.paperdian-tool-icon {
+  display: inline-flex;
+  color: var(--text-muted);
+}
+
+.paperdian-tool.is-running .paperdian-tool-icon {
+  color: var(--paperdian-accent);
+  animation: paperdian-spin 1s linear infinite;
+}
+
+.paperdian-tool.is-complete .paperdian-tool-icon {
+  color: var(--color-green);
+}
+
+.paperdian-tool.is-error .paperdian-tool-icon {
+  color: var(--text-error);
+}
+
+.paperdian-tool-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+.paperdian-tool-status {
+  margin-left: auto;
+  color: var(--text-faint);
+}
+
+.paperdian-tool pre {
+  max-height: 180px;
+  margin: 0;
+  padding: 8px;
+  border-top: 1px solid var(--background-modifier-border);
+  overflow: auto;
+  background: var(--background-primary);
+  color: var(--text-muted);
+  font-family: var(--font-monospace);
+  font-size: 9px;
+  white-space: pre-wrap;
+}
+
+.paperdian-composer-footer {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 4px max(10px, calc((100% - 740px) / 2)) 10px;
+  background: linear-gradient(to bottom, transparent, var(--background-primary) 18%);
+}
+
+.paperdian-note-chip {
+  align-self: flex-start;
+  width: fit-content;
+  max-width: calc(100% - 14px);
+  flex: 0 0 auto;
+  gap: 5px;
+  margin: 6px 7px 0;
+  padding: 2px 3px 2px 6px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: 9px;
+}
+
+.paperdian-note-chip.is-empty {
+  display: none;
+}
+
+.paperdian-note-chip-path {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paperdian-note-chip-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.paperdian-note-chip-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.paperdian-note-chip .paperdian-icon-button {
+  flex-basis: 18px;
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  min-height: 18px;
+}
+
+.paperdian-note-chip .paperdian-icon-button svg {
+  width: 11px;
+  height: 11px;
+}
+
+.paperdian-composer-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 118px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  background: var(--background-primary);
+  transition: border-color 120ms ease;
+}
+
+.paperdian-composer-card:focus-within {
+  border-color: var(--interactive-accent);
+}
+
+.paperdian-skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 7px 0;
+}
+
+.paperdian-skill-chips.is-empty {
+  display: none;
+}
+
+.paperdian-skill-chip {
+  max-width: 100%;
+  gap: 4px;
+  padding: 2px 3px 2px 6px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 999px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: 9px;
+}
+
+.paperdian-skill-chip > span:nth-child(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paperdian-skill-chip svg {
+  width: 11px;
+  height: 11px;
+}
+
+.paperdian-skill-chip .paperdian-icon-button {
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  min-height: 18px;
+}
+
+textarea.paperdian-composer,
+textarea.paperdian-composer:hover,
+textarea.paperdian-composer:focus {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 60px;
+  max-height: 220px;
+  padding: 9px 10px;
+  resize: none;
+  border: 0;
+  border-radius: 8px;
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-normal);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+textarea.paperdian-composer::placeholder {
+  color: var(--text-faint);
+}
+
+.paperdian-composer-toolbar {
+  justify-content: space-between;
+  flex: 0 0 auto;
+  gap: 8px;
+  min-width: 0;
+  padding: 4px 6px 6px;
+}
+
+.paperdian-composer-controls {
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 2px;
+  overflow: visible;
+}
+
+select.paperdian-toolbar-select,
+select.paperdian-toolbar-select:hover,
+select.paperdian-toolbar-select:focus {
+  width: auto;
+  max-width: 118px;
+  min-width: 0;
+  height: 25px;
+  padding: 2px 18px 2px 6px;
+  border: 0;
+  border-radius: 5px;
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 9px;
+}
+
+select.paperdian-toolbar-select:hover,
+select.paperdian-toolbar-select:focus {
+  background-color: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.paperdian-skill-control {
+  position: relative;
+}
+
+button.paperdian-skill-button,
+button.paperdian-skill-button:hover,
+button.paperdian-skill-button:focus-visible,
+button.paperdian-skill-button:active {
+  gap: 4px;
+  min-height: 25px;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 9px;
+}
+
+button.paperdian-skill-button:hover,
+button.paperdian-skill-button:focus-visible {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.paperdian-skill-button svg {
+  width: 11px;
+  height: 11px;
+}
+
+button.paperdian-send-button,
+button.paperdian-send-button:hover,
+button.paperdian-send-button:focus-visible {
+  flex-basis: 28px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  border-radius: 7px;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+button.paperdian-send-button:hover,
+button.paperdian-send-button:focus-visible {
+  background: var(--interactive-accent-hover);
+  color: var(--text-on-accent);
+}
+
+button.paperdian-send-button.is-running {
+  background: var(--background-modifier-error);
+  color: var(--text-error);
+}
+
+.paperdian-skill-popover {
+  position: absolute;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 7px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  background: var(--background-primary);
+  box-shadow: var(--shadow-l);
+}
+
+.paperdian-skill-popover > input,
+.paperdian-skill-popover > input:hover,
+.paperdian-skill-popover > input:focus {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-modifier-form-field);
+  box-shadow: none;
+  color: var(--text-normal);
+  font: inherit;
+  font-size: 11px;
+}
+
+.paperdian-skill-popover > input:focus {
+  border-color: var(--interactive-accent);
+  outline: 0;
+}
+
+.paperdian-skill-list {
+  min-height: 0;
+  margin-top: 6px;
+  overflow-y: auto;
+}
+
+.paperdian-skill-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.paperdian-skill-option:hover {
+  background: var(--background-modifier-hover);
+}
+
+.paperdian-skill-option input {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.paperdian-skill-option-content {
+  min-width: 0;
+}
+
+.paperdian-skill-option-name {
+  color: var(--text-normal);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.paperdian-skill-option-description,
+.paperdian-skill-option-note {
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.paperdian-skill-diagnostics {
+  margin: 5px 4px 0;
+  padding-top: 5px;
+  border-top: 1px solid var(--background-modifier-border);
+  color: var(--text-muted);
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+.paperdian-skill-diagnostics summary {
+  cursor: pointer;
+}
+
+.paperdian-skill-diagnostics div {
+  margin-top: 4px;
+}
+
+.paperdian-empty {
+  padding: 16px 8px;
+  color: var(--text-muted);
+  font-size: 10px;
+  text-align: center;
+}
+
+.paperdian-wechat-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  padding: 12px;
+  overflow: hidden;
+  background: var(--background-primary);
+}
+
+.paperdian-wechat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.paperdian-wechat-title {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.paperdian-wechat-subtitle {
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 9px;
+}
+
+.paperdian-wechat-controls,
+.paperdian-publish-row {
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.paperdian-theme-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+select.paperdian-theme-select {
+  width: auto;
+  min-width: 86px;
+  height: 27px;
+  padding: 2px 24px 2px 8px;
+  font-size: 10px;
+}
+
+.paperdian-toggle-label {
+  gap: 5px;
+  color: var(--text-muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.paperdian-status {
+  flex: 0 0 auto;
+  min-height: 28px;
+  padding: 7px 9px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paperdian-preview {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  border: 1px solid var(--background-modifier-border);
+  border-top: 0;
+  border-radius: 0 0 6px 6px;
+  background: white;
+}
+
+.paperdian-publish-row {
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  margin-top: 8px;
+}
+
+button.paperdian-primary-action,
+button.paperdian-secondary-action {
+  min-height: 30px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
+button.paperdian-primary-action {
+  border: 0;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+button.paperdian-secondary-action {
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-secondary);
+  color: var(--text-normal);
+}
+
+.paperdian-errors {
+  color: var(--text-error);
+  white-space: normal;
+}
+
+.paperdian-warnings {
+  color: var(--text-warning, #a66b00);
+  white-space: normal;
+}
+
+.paperdian-root.is-compact .paperdian-wechat-header {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.paperdian-root.is-compact .paperdian-wechat-controls {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+@keyframes paperdian-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes paperdian-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 380px) {
+  .paperdian-brand-text,
+  .paperdian-tab svg,
+  .paperdian-skill-button-label {
+    display: none;
+  }
+
+  select.paperdian-toolbar-select {
+    max-width: 92px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paperdian-root *,
+  .paperdian-root *::before,
+  .paperdian-root *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

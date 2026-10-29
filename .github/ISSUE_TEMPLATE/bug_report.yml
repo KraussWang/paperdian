@@ -1,0 +1,52 @@
+name: Bug 报告 / Bug report
+description: 报告插件的错误行为
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请勿填写真实 AppID/AppSecret、私钥、服务器地址、`data.json` 内容或论文全文。安全问题请走 [私密漏洞报告](https://github.com/KraussWang/paperdian/security/advisories/new)。
+        Do not include real credentials, keys, server addresses or `data.json`. Report security issues privately.
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述 / What happened
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤 / Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为 / Expected behavior
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Paperdian 版本
+    validations:
+      required: true
+  - type: input
+    id: obsidian-version
+    attributes:
+      label: Obsidian 版本
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: 操作系统 / OS
+    validations:
+      required: true
+  - type: input
+    id: claude-version
+    attributes:
+      label: Claude Code 版本（claude --version）
+  - type: textarea
+    id: logs
+    attributes:
+      label: 脱敏后的错误信息 / Redacted logs
+      render: text

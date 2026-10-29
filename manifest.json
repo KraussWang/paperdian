@@ -1,0 +1,10 @@
+{
+  "id": "paperdian",
+  "name": "Paperdian",
+  "version": "0.3.0",
+  "minAppVersion": "1.11.4",
+  "description": "Claude Code paper-reading workbench and WeChat Official Account draft preview/publishing.",
+  "author": "KraussWang",
+  "authorUrl": "https://github.com/KraussWang",
+  "isDesktopOnly": true
+}
