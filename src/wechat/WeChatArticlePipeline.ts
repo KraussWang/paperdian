@@ -7,8 +7,8 @@ import katexCss from "katex/dist/katex.min.css?raw";
 import { marked } from "marked";
 import { createFileSystemAttachmentResolver, type AttachmentResolver, type AttachmentResolverProvider } from "../attachments/VaultAttachmentResolver";
 import { convertWebpToPng } from "../images/WebpTranscoder";
-import { renderMarkdownDocument, replaceMarkdownImagesWithPlaceholders, resolveColorToken } from "./WechatMarkdownRenderer";
-import type { WeChatThemeName } from "./wechatThemes";
+import { renderMarkdownDocument, replaceMarkdownImagesWithPlaceholders } from "./WechatMarkdownRenderer";
+import { DEFAULT_WECHAT_THEME, type WeChatThemeName } from "./wechatThemes";
 
 const RESPONSIVE_IMAGE_STYLE = "display: block; max-width: 100%; height: auto; margin: 1em auto;";
 
@@ -89,14 +89,13 @@ export class WeChatArticlePipeline {
       : createFileSystemAttachmentResolver(this.vaultPath);
     const blockers: string[] = [];
     const warnings: string[] = [];
-    const theme = options.theme ?? "default";
+    const theme = options.theme ?? DEFAULT_WECHAT_THEME;
 
     const placeholderPrefix = `PAPER_READING_IMAGE_${createHash("sha256").update(file.path).digest("hex").slice(0, 10)}_`;
     const replaced = replaceMarkdownImagesWithPlaceholders(source, placeholderPrefix);
     const frozenMath = freezeMathExpressions(replaced.markdown, `PAPER_READING_MATH_${createHash("sha256").update(file.path).digest("hex").slice(0, 10)}_`);
     const rendered = await renderMarkdownDocument(frozenMath.markdown, {
       theme,
-      primaryColor: resolveColorToken(options.color ?? "blue"),
       author: options.author,
       keepTitle: false
     });
@@ -152,7 +151,7 @@ export class WeChatArticlePipeline {
       .update(source)
       .update(cover.hash)
       .update(images.map(image => image.hash).join("|"));
-    if (theme !== "default") sourceHasher.update(`|theme:${theme}`);
+    sourceHasher.update(`|theme:${theme}`);
     const sourceHash = sourceHasher.digest("hex");
     const prepared: PreparedArticle = {
       sourcePath: normalizeVaultPath(file.path),

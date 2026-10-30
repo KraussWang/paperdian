@@ -3,7 +3,7 @@ import juice from "juice";
 import { marked, Renderer, type Tokens } from "marked";
 import { parseDocument } from "yaml";
 import { maskMarkdownCode } from "../markdownCodeMask";
-import { getWeChatThemeCss, isAcademicThemeName, isWeChatThemeName, type WeChatThemeName } from "./wechatThemes";
+import { DEFAULT_WECHAT_THEME, getWeChatThemeCss, isWeChatThemeName, type WeChatThemeName } from "./wechatThemes";
 
 export interface ImagePlaceholder {
   originalPath: string;
@@ -15,7 +15,6 @@ export interface RenderMarkdownDocumentOptions {
   author?: string;
   defaultTitle?: string;
   keepTitle?: boolean;
-  primaryColor?: string;
   theme?: WeChatThemeName;
 }
 
@@ -26,11 +25,6 @@ export interface RenderMarkdownDocumentResult {
 }
 
 const PAPER_INFO_PATTERN = /<small>\r?\n论文题目：[^\r\n]+<br>\r?\n第一作者：[^\r\n]+<br>\r?\n通讯作者：[^\r\n]+<br>\r?\n通讯单位：[^\r\n]+<br>\r?\nDOI：(?:https:\/\/doi\.org\/\S+|文中未明确说明)\r?\n<\/small>/g;
-
-export function resolveColorToken(value?: string): string | undefined {
-  if (!value) return undefined;
-  return value === "blue" ? "#0f4c81" : value;
-}
 
 export function replaceMarkdownImagesWithPlaceholders(markdown: string, placeholderPrefix: string): { images: ImagePlaceholder[]; markdown: string } {
   const images: ImagePlaceholder[] = [];
@@ -56,10 +50,9 @@ export async function renderMarkdownDocument(markdown: string, options: RenderMa
   let contentHtml = await marked.parse(paperInfo.markdown, { async: true, gfm: true, breaks: false, renderer });
   contentHtml = restorePaperInfo(contentHtml, paperInfo.blocks);
   if (options.keepTitle === false) contentHtml = contentHtml.replace(/^<h1[\s\S]*?<\/h1>\s*/i, "");
-  if (isAcademicThemeName(options.theme)) contentHtml = formatAcademicBlocks(contentHtml);
+  contentHtml = formatAcademicBlocks(contentHtml);
   const metadata = buildMetadata(parsed.attributes, parsed.body, options.defaultTitle, options.author);
-  const color = options.primaryColor ?? "#0f4c81";
-  const css = getWeChatThemeCss(options.theme ?? "default", color);
+  const css = getWeChatThemeCss(options.theme ?? DEFAULT_WECHAT_THEME);
   const html = buildDocument(metadata, contentHtml, css);
   return { contentHtml, html: juice(html, { inlinePseudoElements: true, preserveImportant: true, resolveCSSVariables: true }), yamlData: parsed.attributes };
 }

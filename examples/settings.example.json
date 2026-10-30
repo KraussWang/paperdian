@@ -7,7 +7,7 @@
     "availableModels": ["", "sonnet", "opus"]
   },
   "wechat": {
-    "theme": "default",
+    "theme": "academic-blue",
     "alias": "main",
     "author": "",
     "sshHost": "",

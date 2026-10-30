@@ -55,16 +55,19 @@ describe("WeChat Markdown themes", () => {
     await expect(renderMarkdownDocument("# 标题", { theme: "sepia" as never })).rejects.toThrow("不支持的公众号主题：sepia");
   });
 
-  it("dispatches default and dark-blue to distinct style systems", async () => {
-    const markdown = "# 标题\n\n## 小节\n\n- 指标";
-    const defaultDocument = await renderMarkdownDocument(markdown, { theme: "default" });
-    const darkBlueDocument = await renderMarkdownDocument(markdown, { theme: "dark-blue" });
+  it("rejects the removed default and dark-blue themes", async () => {
+    for (const theme of ["default", "dark-blue"]) {
+      await expect(renderMarkdownDocument("# 标题", { theme: theme as never })).rejects.toThrow(`不支持的公众号主题：${theme}`);
+    }
+  });
 
-    expect(defaultDocument.html).toContain("border-left: 4px solid #0f4c81");
-    expect(darkBlueDocument.html).toContain("border-bottom: 2px solid #173f7a");
-    expect(darkBlueDocument.html).toContain("color: #a84317");
-    expect(darkBlueDocument.html).toContain('color: #3f3f3f; background: #ffffff');
-    expect(darkBlueDocument.html).toContain('color: #3f3f3f; font-family: -apple-system');
+  it("falls back to the academic-blue theme when no theme is given", async () => {
+    const markdown = "# 标题\n\n## 小节\n\n- 指标";
+    const fallback = await renderMarkdownDocument(markdown);
+    const academicBlue = await renderMarkdownDocument(markdown, { theme: "academic-blue" });
+
+    expect(fallback.html).toBe(academicBlue.html);
+    expect(fallback.html).toContain("#183a7b");
   });
 
   it("renders canonical paper information when the clipped note does not provide a DOI", async () => {

@@ -1,5 +1,3 @@
-import { WECHAT_DARK_BLUE_CSS } from "./wechatDarkBlueTheme";
-import { WECHAT_DEFAULT_CSS } from "./wechatDefaultTheme";
 import { WECHAT_TEAL_CSS } from "./wechatTealTheme";
 
 export const ACADEMIC_THEMES = {
@@ -14,26 +12,22 @@ export const ACADEMIC_THEMES = {
 } as const;
 
 export type AcademicThemeName = keyof typeof ACADEMIC_THEMES;
-export type WeChatThemeName = "default" | "dark-blue" | AcademicThemeName;
+export type WeChatThemeName = AcademicThemeName;
 
-export const WECHAT_THEME_OPTIONS: ReadonlyArray<{ name: WeChatThemeName; label: string }> = [
-  { name: "default", label: "默认蓝色" },
-  { name: "dark-blue", label: "深蓝色" },
-  ...Object.entries(ACADEMIC_THEMES).map(([name, theme]) => ({ name: name as AcademicThemeName, label: `${theme.label}·学术阅读` }))
-];
+export const DEFAULT_WECHAT_THEME: WeChatThemeName = "academic-blue";
+
+export const WECHAT_THEME_OPTIONS: ReadonlyArray<{ name: WeChatThemeName; label: string }> =
+  Object.entries(ACADEMIC_THEMES).map(([name, theme]) => ({ name: name as AcademicThemeName, label: `${theme.label}·学术阅读` }));
 
 export function isAcademicThemeName(value: unknown): value is AcademicThemeName {
   return typeof value === "string" && Object.hasOwn(ACADEMIC_THEMES, value);
 }
 
 export function isWeChatThemeName(value: unknown): value is WeChatThemeName {
-  return value === "default" || value === "dark-blue" || isAcademicThemeName(value);
+  return isAcademicThemeName(value);
 }
 
-export function getWeChatThemeCss(theme: WeChatThemeName, primaryColor = "#0f4c81"): string {
-  if (isAcademicThemeName(theme)) {
-    const palette = ACADEMIC_THEMES[theme];
-    return WECHAT_TEAL_CSS.replaceAll("#03677a", palette.primary).replaceAll("#e5f0f2", palette.surface);
-  }
-  return theme === "dark-blue" ? WECHAT_DARK_BLUE_CSS : WECHAT_DEFAULT_CSS.replaceAll("#0f4c81", primaryColor);
+export function getWeChatThemeCss(theme: WeChatThemeName): string {
+  const palette = ACADEMIC_THEMES[theme];
+  return WECHAT_TEAL_CSS.replaceAll("#03677a", palette.primary).replaceAll("#e5f0f2", palette.surface);
 }
