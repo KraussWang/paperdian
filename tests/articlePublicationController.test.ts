@@ -32,9 +32,9 @@ describe("ArticlePublicationController", () => {
       publish: async () => successfulReceipt
     });
 
-    const result = await controller.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "dark-blue" });
+    const result = await controller.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "teal" });
 
-    expect(calls).toEqual([[{ path: "papers/article.md" }, { theme: "dark-blue", color: "blue", author: "Research team" }]]);
+    expect(calls).toEqual([[{ path: "papers/article.md" }, { theme: "teal", color: "blue", author: "Research team" }]]);
     expect(result).toMatchObject({ kind: "ready", publishDisabled: false, recreateEnabled: false, receipt: undefined });
   });
 
@@ -46,7 +46,7 @@ describe("ArticlePublicationController", () => {
       publish: async () => successfulReceipt
     });
 
-    const result = await controller.prepare({ sourcePath: "papers/article.md", author: "", theme: "default" });
+    const result = await controller.prepare({ sourcePath: "papers/article.md", author: "", theme: "academic-blue" });
     expect(result).toMatchObject({ kind: "ready", publishDisabled: false, warnings });
   });
 
@@ -61,7 +61,7 @@ describe("ArticlePublicationController", () => {
       publish: async () => successfulReceipt
     });
 
-    await expect(controller.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "default" })).resolves.toEqual({
+    await expect(controller.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "academic-blue" })).resolves.toEqual({
       kind: "blocked",
       previewHtml: "<article>blocked</article>",
       blockers: ["missing title"],
@@ -83,13 +83,13 @@ describe("ArticlePublicationController", () => {
       publish: async () => successfulReceipt
     });
 
-    await expect(duplicateController.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "default" })).resolves.toMatchObject({
+    await expect(duplicateController.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "academic-blue" })).resolves.toMatchObject({
       kind: "ready",
       receipt: unknownReceipt,
       publishDisabled: true,
       recreateEnabled: true
     });
-    await expect(failingController.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "default" })).resolves.toMatchObject({
+    await expect(failingController.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "academic-blue" })).resolves.toMatchObject({
       kind: "error",
       error: { message: "preview unavailable" }
     });
@@ -102,7 +102,7 @@ describe("ArticlePublicationController", () => {
       publish: async () => successfulReceipt
     });
 
-    const result = await controller.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "default" });
+    const result = await controller.prepare({ sourcePath: "papers/article.md", author: "Research team", theme: "academic-blue" });
 
     expect(result).toEqual({
       kind: "ready",

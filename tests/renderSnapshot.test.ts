@@ -8,7 +8,7 @@ import { WeChatArticlePipeline } from "../src/wechat/WeChatArticlePipeline";
 const PNG = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=", "base64");
 
 describe("WeChat article HTML", () => {
-  it("matches the reviewed default/blue publishing snapshot", async () => {
+  it("matches the reviewed academic-blue publishing snapshot", async () => {
     const vault = await mkdtemp(path.join(os.tmpdir(), "paperdian-render-snapshot-"));
     await mkdir(path.join(vault, "article", "figures"), { recursive: true });
     await writeFile(path.join(vault, "article", "cover.png"), PNG);
@@ -40,19 +40,19 @@ print("paperdian")
 
 ![图 1：结果](figures/plot.png)
 `);
-    const prepared = await new WeChatArticlePipeline(vault).prepare({ path: "article/paper.md" }, { theme: "default", color: "blue", author: "Paper Reading" });
+    const prepared = await new WeChatArticlePipeline(vault).prepare({ path: "article/paper.md" }, { theme: "academic-blue", color: "blue", author: "Paper Reading" });
 
-    await expect(prepared.html).toMatchFileSnapshot("./snapshots/wechat-default-blue.html");
+    await expect(prepared.html).toMatchFileSnapshot("./snapshots/wechat-academic-blue.html");
   });
 
-  it("matches the reviewed dark-blue publishing snapshot and separates its draft hash", async () => {
-    const vault = await mkdtemp(path.join(os.tmpdir(), "paperdian-dark-blue-snapshot-"));
+  it("includes the theme in the draft hash and defaults to academic-blue", async () => {
+    const vault = await mkdtemp(path.join(os.tmpdir(), "paperdian-theme-hash-"));
     await mkdir(path.join(vault, "article", "figures"), { recursive: true });
     await writeFile(path.join(vault, "article", "figures", "plot.png"), PNG);
     const sourcePath = path.join(vault, "article", "paper.md");
     await writeFile(sourcePath, `---
 title: 数据复盘渲染验收
-summary: 验证深蓝色公众号主题
+summary: 验证主题草稿哈希
 author: Paper Reading
 sourceUrl: https://doi.org/10.1000/example
 ---
@@ -88,17 +88,16 @@ print("paperdian")
 `);
     const pipeline = new WeChatArticlePipeline(vault);
 
-    const defaultPrepared = await pipeline.prepare({ path: "article/paper.md" }, { theme: "default", color: "blue", author: "Paper Reading" });
-    const darkBluePrepared = await pipeline.prepare({ path: "article/paper.md" }, { theme: "dark-blue", color: "blue", author: "Paper Reading" });
+    const omittedPrepared = await pipeline.prepare({ path: "article/paper.md" }, { color: "blue", author: "Paper Reading" });
+    const academicBluePrepared = await pipeline.prepare({ path: "article/paper.md" }, { theme: "academic-blue", color: "blue", author: "Paper Reading" });
+    const tealPrepared = await pipeline.prepare({ path: "article/paper.md" }, { theme: "teal", color: "blue", author: "Paper Reading" });
     const source = await readFile(sourcePath, "utf8");
     const imageHash = createHash("sha256").update(PNG).digest("hex");
-    const legacyDefaultHash = createHash("sha256").update(source).update(imageHash).update(imageHash).digest("hex");
+    const expectedHash = createHash("sha256").update(source).update(imageHash).update(imageHash).update("|theme:academic-blue").digest("hex");
 
-    expect(defaultPrepared.sourceHash).toBe(legacyDefaultHash);
-    expect(darkBluePrepared.sourceHash).not.toBe(defaultPrepared.sourceHash);
-    expect(darkBluePrepared.theme).toEqual({ name: "dark-blue", color: "blue" });
-    expect(darkBluePrepared.html).toContain('color: #3f3f3f; font-size: 15px');
-    expect(darkBluePrepared.html).toContain('color: #3f3f3f; font-family: -apple-system');
-    await expect(darkBluePrepared.html).toMatchFileSnapshot("./snapshots/wechat-dark-blue.html");
+    expect(omittedPrepared.theme).toEqual({ name: "academic-blue", color: "blue" });
+    expect(omittedPrepared.sourceHash).toBe(expectedHash);
+    expect(academicBluePrepared.sourceHash).toBe(expectedHash);
+    expect(tealPrepared.sourceHash).not.toBe(expectedHash);
   });
 });

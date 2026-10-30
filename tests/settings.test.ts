@@ -34,7 +34,7 @@ describe("Paper Reading settings", () => {
     expect(merged.claude).not.toHaveProperty("skillDirectories");
     expect(needsSettingsMigration(saved)).toBe(true);
     expect(needsSettingsMigration(merged)).toBe(false);
-    expect(merged.wechat.theme).toBe("default");
+    expect(merged.wechat.theme).toBe("academic-blue");
   });
 
   it("normalizes legacy saved settings without losing active WeChat values", () => {
@@ -67,15 +67,12 @@ describe("Paper Reading settings", () => {
     });
     expect(merged).not.toHaveProperty("legacyImport");
     expect(merged.wechat).not.toHaveProperty("accountName");
-    expect(merged.wechat.theme).toBe("default");
+    expect(merged.wechat.theme).toBe("academic-blue");
     expect(merged.wechat).not.toHaveProperty("color");
   });
 
   it("persists supported WeChat themes and migrates invalid theme values", () => {
-    expect(mergeSettings({
-      ...DEFAULT_SETTINGS,
-      wechat: { ...DEFAULT_SETTINGS.wechat, theme: "dark-blue" }
-    }).wechat.theme).toBe("dark-blue");
+    expect(DEFAULT_SETTINGS.wechat.theme).toBe("academic-blue");
 
     expect(mergeSettings({
       ...DEFAULT_SETTINGS,
@@ -91,11 +88,13 @@ describe("Paper Reading settings", () => {
       wechat: { ...DEFAULT_SETTINGS.wechat, theme: "sepia" }
     };
     expect(needsSettingsMigration(invalid)).toBe(true);
-    expect(mergeSettings(invalid as unknown as Partial<PaperdianSettings>).wechat.theme).toBe("default");
-    expect(needsSettingsMigration({
-      ...DEFAULT_SETTINGS,
-      wechat: { ...DEFAULT_SETTINGS.wechat, theme: "dark-blue" }
-    })).toBe(false);
+    expect(mergeSettings(invalid as unknown as Partial<PaperdianSettings>).wechat.theme).toBe("academic-blue");
+
+    for (const removed of ["default", "dark-blue"]) {
+      const legacy = { ...DEFAULT_SETTINGS, wechat: { ...DEFAULT_SETTINGS.wechat, theme: removed } };
+      expect(needsSettingsMigration(legacy)).toBe(true);
+      expect(mergeSettings(legacy as unknown as Partial<PaperdianSettings>).wechat.theme).toBe("academic-blue");
+    }
   });
 
   it("keeps the existing SecretStorage identifiers stable", () => {

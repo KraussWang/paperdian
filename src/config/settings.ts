@@ -1,4 +1,4 @@
-import { isWeChatThemeName, type WeChatThemeName } from "../wechat/wechatThemes";
+import { DEFAULT_WECHAT_THEME, isWeChatThemeName, type WeChatThemeName } from "../wechat/wechatThemes";
 
 export interface PaperdianSettings {
   claude: {
@@ -33,7 +33,7 @@ export const DEFAULT_SETTINGS: PaperdianSettings = {
     availableModels: ["", "sonnet", "opus"]
   },
   wechat: {
-    theme: "default", alias: "main", author: "", sshHost: "", sshUser: "root", sshPort: 22,
+    theme: DEFAULT_WECHAT_THEME, alias: "main", author: "", sshHost: "", sshUser: "root", sshPort: 22,
     sshPrivateKeyPath: "", needOpenComment: 0, onlyFansCanComment: 0
   }
 };

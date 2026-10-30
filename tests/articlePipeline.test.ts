@@ -175,11 +175,11 @@ sourceUrl: https://doi.org/10.1/example
 `);
     const pipeline = new WeChatArticlePipeline(vault);
 
-    const prepared = await pipeline.prepare({ path: "article/paper.md" }, { theme: "default", color: "blue", author: "Configured author" });
+    const prepared = await pipeline.prepare({ path: "article/paper.md" }, { theme: "academic-blue", color: "blue", author: "Configured author" });
 
     expect(prepared.metadata.title).toBe("Al₁₋ₓScₓN 研究");
     expect(prepared.metadata.summary).toBe("第一段总结。");
-    expect(prepared.theme).toEqual({ name: "default", color: "blue" });
+    expect(prepared.theme).toEqual({ name: "academic-blue", color: "blue" });
     expect(prepared.images).toHaveLength(1);
     expect(prepared.cover.sourcePath).toBe("article/figures/plot.png");
     expect(prepared.cover.mimeType).toBe("image/png");
@@ -246,7 +246,7 @@ DOI：https://doi.org/10.1000/example
     expect(prepared.html).not.toContain("&lt;small&gt;");
     expect(prepared.html).not.toContain("&lt;br&gt;");
     expect(prepared.html).toContain("paperdian-paper-info");
-    expect(prepared.html).toContain("font-size: 14px");
+    expect(prepared.html).toContain("font-size: 13px");
     expect(prepared.html).toContain("论文题目：English title");
   });
 

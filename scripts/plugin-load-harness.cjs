@@ -180,7 +180,7 @@ Module._load = function patchedLoad(request, parent, isMain) {
     if (wechat.sshHost !== "203.0.113.8" || wechat.sshUser !== "ubuntu" || wechat.sshPort !== 22 || wechat.sshPrivateKeyPath !== "C:\\keys\\wechat.pem") throw new Error("Saved SSH settings were not preserved.");
     if (wechat.needOpenComment !== 1 || wechat.onlyFansCanComment !== 0) throw new Error("Saved comment settings were not preserved.");
     const normalized = JSON.stringify(savedData);
-    if (wechat.theme !== "default") throw new Error("Saved theme was not preserved.");
+    if (wechat.theme !== "academic-blue") throw new Error("Removed legacy theme was not migrated to academic-blue.");
     for (const obsolete of ["legacyImport", "accountName", "appIdSecretName", "appSecretName", "color"]) {
       if (normalized.includes(`\"${obsolete}\"`)) throw new Error(`Obsolete setting was not removed: ${obsolete}`);
     }
@@ -188,7 +188,7 @@ Module._load = function patchedLoad(request, parent, isMain) {
     process.stdout.write("SETTINGS_MIGRATION_OK\n");
   }
   if (previewMode) {
-    const prepared = await plugin.pipeline.prepare({ path: "output/article.md" }, { theme: "default", color: "blue", author: "Author" });
+    const prepared = await plugin.pipeline.prepare({ path: "output/article.md" }, { theme: "academic-blue", color: "blue", author: "Author" });
     if (!prepared.previewHtml.includes("data:image/png;base64,")) throw new Error("Preview HTML did not contain the frozen image.");
     if (mathMode && (!prepared.previewHtml.includes("paperdian-math") || !prepared.previewHtml.includes("class=\"katex\""))) {
       throw new Error("Preview HTML did not contain statically rendered KaTeX math.");

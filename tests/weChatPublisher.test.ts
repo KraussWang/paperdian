@@ -31,7 +31,7 @@ describe("WeChatPublisher", () => {
     const vault = await mkdtemp(path.join(os.tmpdir(), "paperdian-draft-content-"));
     await writeFile(path.join(vault, "cover.png"), PNG);
     await writeFile(path.join(vault, "article.md"), "---\ntitle: 标题\ncover: cover.png\n---\n# 标题\n\nH<sub>2</sub> 与 (NH<sub>4</sub>)<sub>2</sub>SO<sub>4</sub>。\n\n![图片](cover.png)\n");
-    const prepared = await new WeChatArticlePipeline(vault).prepare({ path: "article.md" }, { author: "", theme: "default" });
+    const prepared = await new WeChatArticlePipeline(vault).prepare({ path: "article.md" }, { author: "", theme: "academic-blue" });
     let uploadedHtml = "";
     const client: WeChatClient = {
       async open() {
@@ -188,6 +188,6 @@ function fixturePrepared(): PreparedArticle {
   const image = { id: "body-1", sourcePath: "article/a.png", fileName: "a.png", mimeType: "image/png" as const, hash: "b".repeat(64), bytes: new Uint8Array([1]), alt: "a" };
   return {
     sourcePath: "article/paper.md", sourceHash: "a".repeat(64), metadata: { title: "标题", summary: "", author: "配置作者", sourceUrl: "https://example.com/source" },
-    html: '<img src="paperdian-asset://body-1">', previewHtml: "", cover: { ...image, id: "cover" }, images: [image], theme: { name: "default", color: "blue" }, generatedAt: "2026-01-01T00:00:00.000Z"
+    html: '<img src="paperdian-asset://body-1">', previewHtml: "", cover: { ...image, id: "cover" }, images: [image], theme: { name: "academic-blue", color: "blue" }, generatedAt: "2026-01-01T00:00:00.000Z"
   };
 }
