@@ -50,7 +50,7 @@ export class PaperdianSettingsTab extends PluginSettingTab {
     this.actionSetting("复制路径", "复制当前 Vault 专用 Skill 库的完整路径。", "复制路径", async () => {
       await navigator.clipboard.writeText(directory); new Notice("Skill 库路径已复制。");
     }, "无法访问剪贴板，请手动复制上方路径。");
-    this.actionSetting("示例 Skills", "安装论文精读与公众号编辑两套示例；已有同名目录会跳过，保留你的修改。", "安装示例 Skills", async () => {
+    this.actionSetting("示例 Skills", "安装论文精读、公众号编辑与研究速递三套示例；已有同名目录会跳过，保留你的修改。", "安装示例 Skills", async () => {
       const result = await installBuiltinSkills(directory); this.plugin.rebuildSkillCatalog();
       new Notice(`已安装 ${result.installed} 个示例，保留 ${result.skipped} 个已有目录。`);
     }, "示例安装未完成，请检查目录写入权限；已有目录不会被覆盖。");

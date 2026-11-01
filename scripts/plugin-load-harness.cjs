@@ -168,7 +168,7 @@ Module._load = function patchedLoad(request, parent, isMain) {
   if (process.argv.includes("--settings-ui")) await assertSettingsUi(plugin);
   if (process.argv.includes("--assert-skills")) {
     const catalog = await plugin.skills.list();
-    if (catalog.skills.length !== 2 || catalog.diagnostics.length !== 0) throw new Error("Installed Vault did not expose both bundled Skills.");
+    if (catalog.skills.length !== 3 || catalog.diagnostics.length !== 0) throw new Error("Installed Vault did not expose all bundled Skills.");
     for (const command of ["open-workbench", "deep-read-current-note", "normalize-current-file-attachments"]) {
       if (!registeredCommands.includes(command)) throw new Error(`Plugin command is missing: ${command}`);
     }

@@ -2,10 +2,12 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import deepReading from "./builtin/material-paper-deep-reading/SKILL.md";
 import wechatEditor from "./builtin/material-paper-wechat-editor/SKILL.md";
+import researchBrief from "./builtin/material-paper-research-brief/SKILL.md";
 
 const builtins = [
   { id: "material-paper-deep-reading", markdown: deepReading },
-  { id: "material-paper-wechat-editor", markdown: wechatEditor }
+  { id: "material-paper-wechat-editor", markdown: wechatEditor },
+  { id: "material-paper-research-brief", markdown: researchBrief }
 ];
 
 /** Install only missing directories; an existing user's Skill is never overwritten. */

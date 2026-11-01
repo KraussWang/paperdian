@@ -18,7 +18,7 @@ fs.mkdirSync(path.join(release, "skills"), { recursive: true });
 for (const file of ["main.js", "manifest.json", "styles.css"]) {
   fs.copyFileSync(path.join(root, file), path.join(release, "paperdian", file));
 }
-for (const skill of ["material-paper-deep-reading", "material-paper-wechat-editor"]) {
+for (const skill of ["material-paper-deep-reading", "material-paper-wechat-editor", "material-paper-research-brief"]) {
   fs.cpSync(path.join(root, "src", "skills", "builtin", skill), path.join(release, "skills", skill), { recursive: true });
 }
 for (const file of ["LICENSE", "THIRD_PARTY_NOTICES.md"]) {

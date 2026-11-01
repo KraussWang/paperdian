@@ -9,6 +9,7 @@ const MAX_SELECTED_RESOURCE_FILES = 500;
 const MAX_RESOURCE_FILE_BYTES = 25_000_000;
 export const MATERIAL_PAPER_DEEP_READING_SKILL_ID = "builtin:material-paper-deep-reading";
 export const MATERIAL_PAPER_WECHAT_EDITOR_SKILL_ID = "builtin:material-paper-wechat-editor";
+export const MATERIAL_PAPER_RESEARCH_BRIEF_SKILL_ID = "builtin:material-paper-research-brief";
 
 export interface SkillDefinition {
   id: string;
@@ -240,7 +241,8 @@ async function readSkill(filePath: string, directoryName: string, diagnostics: S
     return {
       id: directoryName === "material-paper-deep-reading" ? MATERIAL_PAPER_DEEP_READING_SKILL_ID
         : directoryName === "material-paper-wechat-editor" ? MATERIAL_PAPER_WECHAT_EDITOR_SKILL_ID
-          : `local:${filePath}`,
+          : directoryName === "material-paper-research-brief" ? MATERIAL_PAPER_RESEARCH_BRIEF_SKILL_ID
+            : `local:${filePath}`,
       name: parsed.name,
       description: parsed.description,
       instructions: parsed.instructions,

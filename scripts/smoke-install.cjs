@@ -23,7 +23,7 @@ function assertSameTree(source, packaged) {
 }
 
 try {
-  for (const skill of ["material-paper-deep-reading", "material-paper-wechat-editor"]) {
+  for (const skill of ["material-paper-deep-reading", "material-paper-wechat-editor", "material-paper-research-brief"]) {
     assertSameTree(path.join(root, "src", "skills", "builtin", skill), path.join(release, "skills", skill));
   }
   for (const [source, packaged] of [

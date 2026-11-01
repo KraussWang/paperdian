@@ -49,6 +49,8 @@ npm run privacy:check
     SKILL.md
   material-paper-wechat-editor/
     SKILL.md
+  material-paper-research-brief/
+    SKILL.md
   your-skill/
     SKILL.md
     references/
@@ -56,7 +58,7 @@ npm run privacy:check
     scripts/
 ```
 
-设置页可以安装内置的论文精读和公众号编辑示例；已有同名目录会完整保留。示例也随 `release/skills/` 提供。修改、添加或删除后，重新打开 Skill 选择器刷新。执行时复制选中 Skill 的完整目录作为本轮临时副本。插件不扫描 Claude 的全局 Skill 库，也不在升级时覆盖用户 Skills。
+设置页可以安装内置的论文精读、公众号编辑和研究速递示例；已有同名目录会完整保留。示例也随 `release/skills/` 提供。修改、添加或删除后，重新打开 Skill 选择器刷新。执行时复制选中 Skill 的完整目录作为本轮临时副本。插件不扫描 Claude 的全局 Skill 库，也不在升级时覆盖用户 Skills。
 
 ### 微信公众号草稿
 

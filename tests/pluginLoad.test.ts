@@ -24,6 +24,7 @@ describe("packaged Obsidian plugin", () => {
     const bundle = readFileSync(path.resolve("main.js"), "utf8");
     expect(bundle).toContain("paperdian-skill-option-note");
     expect(bundle.includes("material-paper-wechat-editor")).toBe(true);
+    expect(bundle.includes("material-paper-research-brief")).toBe(true);
     expect(bundle).not.toContain(".claude\\skills");
     expect(bundle).toContain("normalize-current-file-attachments");
     expect(bundle).not.toContain("literature-radar-scan-now");
